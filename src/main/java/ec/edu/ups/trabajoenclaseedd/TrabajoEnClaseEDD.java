@@ -50,47 +50,63 @@ public class TrabajoEnClaseEDD {
         pilaTareasDeColas.agregarTarea(new Tarea(3, colaTareasInt));
         pilaTareasDeColas.agregarTarea(new Tarea(4, colaTareasArregloString));
 
-        System.out.println("COLA TAREAS");
-        while (!colaTareas.estaVacia()) {
-            Tarea<String> tareaProcesada = colaTareas.procesarTarea();
-
-            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
-        }
-        System.out.println("COLA TAREAS ENTEROS");
-        while (!colaTareasInt.estaVacia()) {
-            Tarea<Integer> tareaProcesada = colaTareasInt.procesarTarea();
-
-            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
-        }
-        System.out.println("COLA TAREAS ARREGLOS ENTEROS");
-        while (!colaTareasArregloEnteros.estaVacia()) {
-            Tarea<int[]> tareaProcesada = colaTareasArregloEnteros.procesarTarea();
-
-            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + Arrays.toString(tareaProcesada.getAtributo()));
-        }
-        
-        System.out.println("COLA TAREAS ARREGLO STRING");
-
-        while (!colaTareasArregloString.estaVacia()) {
-            Tarea<String[]> tareaProcesada = colaTareasArregloString.procesarTarea();
-
-            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + Arrays.toString(tareaProcesada.getAtributo()));
-        }
-
-        System.out.println("PILA TAREAS");
-        while (!pilaTareas.estaVacia()) {
-            Tarea<Integer> tareaProcesada = pilaTareas.procesarTarea();
-
-            System.out.println("Procesando tarea de la pila: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
-
-        }
-        
+//        System.out.println("COLA TAREAS");
+//        while (!colaTareas.estaVacia()) {
+//            Tarea<String> tareaProcesada = colaTareas.procesarTarea();
+//
+//            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
+//        }
+//        System.out.println("COLA TAREAS ENTEROS");
+//        while (!colaTareasInt.estaVacia()) {
+//            Tarea<Integer> tareaProcesada = colaTareasInt.procesarTarea();
+//
+//            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
+//        }
+//        System.out.println("COLA TAREAS ARREGLOS ENTEROS");
+//        while (!colaTareasArregloEnteros.estaVacia()) {
+//            Tarea<int[]> tareaProcesada = colaTareasArregloEnteros.procesarTarea();
+//
+//            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + Arrays.toString(tareaProcesada.getAtributo()));
+//        }
+//
+//        System.out.println("COLA TAREAS ARREGLO STRING");
+//
+//        while (!colaTareasArregloString.estaVacia()) {
+//            Tarea<String[]> tareaProcesada = colaTareasArregloString.procesarTarea();
+//
+//            System.out.println("Procesando tarea de la cola: \n\t Sale--> " + tareaProcesada.getId() + " - " + Arrays.toString(tareaProcesada.getAtributo()));
+//        }
+//
+//        System.out.println("PILA TAREAS");
+//        while (!pilaTareas.estaVacia()) {
+//            Tarea<Integer> tareaProcesada = pilaTareas.procesarTarea();
+//
+//            System.out.println("Procesando tarea de la pila: \n\t Sale--> " + tareaProcesada.getId() + " - " + tareaProcesada.getAtributo());
+//
+//        }
         System.out.println("PILA TAREAS DE COLAS");
-        while(!pilaTareasDeColas.estaVacia()){
-            Tarea<ColaTareas> tareaProcesada = pilaTareasDeColas.procesarTarea();
-            
-            System.out.println("Procesando tarea de la pila: \n\t Sale-->"+tareaProcesada.getId()+ " - " +tareaProcesada.toString());
+        while (!pilaTareasDeColas.estaVacia()) {
+            Tarea<ColaTareas> colaTarea = pilaTareasDeColas.procesarTarea();
+            while (!colaTarea.getAtributo().estaVacia()) {
+                Tarea<?> tareaProcesada = colaTarea.getAtributo().procesarTarea();
+                Object atributo = tareaProcesada.getAtributo();
+
+                if (atributo instanceof int[]) {
+                    int[] arreglo = (int[]) atributo;
+                    for (int i = 0; i < arreglo.length; i++) {
+                        System.out.println("Procesando tarea de la pila: \n\t Sale--> " + tareaProcesada.getId() + " - " + arreglo[i]);
+                    }
+                } else if (atributo instanceof String[]) {
+                    String[] arreglo = (String[]) atributo;
+                    for (int i = 0; i < arreglo.length; i++) {
+                        System.out.println("Procesando tarea de la pila: \n\t Sale--> " + tareaProcesada.getId() + " - " + arreglo[i]);
+                    }
+                } else {
+                    System.out.println("Procesando tarea de la pila: \n\t Sale--> " + tareaProcesada.getId() + " - " + atributo);
+                }
+            }
         }
+
     }
 
 }
