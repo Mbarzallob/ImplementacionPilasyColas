@@ -87,6 +87,7 @@ public class TrabajoEnClaseEDD {
         System.out.println("PILA TAREAS DE COLAS");
         while (!pilaTareasDeColas.estaVacia()) {
             Tarea<ColaTareas> colaTarea = pilaTareasDeColas.procesarTarea();
+            System.out.println("Cola #"+colaTarea.getId());
             while (!colaTarea.getAtributo().estaVacia()) {
                 Tarea<?> tareaProcesada = colaTarea.getAtributo().procesarTarea();
                 Object atributo = tareaProcesada.getAtributo();
